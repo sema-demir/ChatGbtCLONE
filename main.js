@@ -1,11 +1,29 @@
 const chatInput = document.querySelector("#chat-input");
-console.log(chatInput);
 const sendButton = document.querySelector("#send-btn");
 const chatContainer = document.querySelector(".chat-container");
 const themeButton = document.querySelector("#theme-btn");
+const deleteButton = document.querySelector('#delete-btn')
+
 
 let userText = null;
-const API_KEY = "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";
+const API_KEY = "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";
+const initialHeight = chatInput.scrollHeight
+const loadDataFromLocalStroge = () =>{
+  const themeColor = localStorage.getItem("theme-color")
+  document.body.classList.toggle("light-mode", themeColor === "light_mode");
+  localStorage.setItem("theme-color", themeButton.innetText);
+  themeButton.innerText = document.body.classList.contains("light-mode")
+  ? "dark_mode"
+  : "light_mode"
+
+  const defaultText = `<div class= "default-text" > 
+  <h1>ChatGBT Clone</h1>
+  </div>`;
+  chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText
+  chatContainer.scrollTo(0, chatContainer.scrollHeight)
+}
+loadDataFromLocalStroge()
+
 
 const getChatResponse = async (incomingChatDiv) => {
   const API_URL = "https://api.openai.com/v1/completions";
@@ -64,6 +82,8 @@ const showTypingAnimation = () => {
   chatContainer.appendChild(incomingChatDiv);
   chatContainer.scrollTo(0, chatContainer.scrollHeight);
   getChatResponse(incomingChatDiv);
+  localStorage.setItem("all-chats", chatContainer.innerHTML);
+
 };
 
 const handleOutgoingchat = () => {
@@ -79,14 +99,33 @@ const handleOutgoingchat = () => {
 </div>`;
   const outgoingChatDiv = createElement(html, "outgoing");
   outgoingChatDiv.querySelector("p").textContent = userText;
-  //document = querySelector(".default-text") ?.remove()
+  document.querySelector(".default-text")?.remove();
   chatContainer.appendChild(outgoingChatDiv);
   chatContainer.scrollTo(0, chatContainer.scrollHeight);
   setTimeout(showTypingAnimation, 500);
+  chatInput.innerText="";
 };
 themeButton.addEventListener("click", () =>{
  document.body.classList.toggle("light-mode")
- //themeButton.innerText = document.body.classList("light-mode")
+ localStorage.setItem("theme-color", themeButton.innerText);
+ themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode"
+})
+
+deleteButton.addEventListener("click", () =>{
+if(confirm ("Tüm sohbetleri silmek istediğinizden emin misinzi?"))
+localStorage.removeItem("all-chats")
+loadDataFromLocalStroge()
+});
+
+chatInput.addEventListener("input", () =>{
+  chatInput.style.height = `${initialHeight}px`
+  chatInput.style.height = `${chatInput.scrollHeight}px`
+})
+chatInput.addEventListener("keydown", (e) =>{
+ if (e.key === "Enter")  {
+  e.preventDefault();
+  handleOutgoingchat();
+ }
 })
 
 sendButton.addEventListener("click", handleOutgoingchat); 

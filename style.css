@@ -5,7 +5,7 @@
     font-family: 'Poppins', sans-serif;
 }
 :root{
-    --text-color: white; 
+    --text-color: #ffffff; 
     --icon-color: #acacbe;
     --icon-hover-bg: #5b5e71;
     --placeholder-color: #cccccc;
@@ -124,7 +124,7 @@ padding-left: 25px;
         opacity: 0.4;
         transform: translateY(-6px);
     }
-    %44 {
+    44% {
         opacity: 0.2s;
     }
 }
@@ -161,6 +161,7 @@ width: 100%;
     overflow-y: auto;
     resize: none;
     padding: 15px 25px 15px 20px;
+    color: var(--text-color);
     background: var(--incoming-chat-bg);
     outline: 1px solid var(--incoming-chat-border);
    
@@ -209,7 +210,17 @@ visibility: visible;
     color: white;
 }
 
+.default-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    padding:   0 10px;
+    color: var(--text-color);
+    text-align: center;
 
+}
 
 
 
