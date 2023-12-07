@@ -16,4 +16,4 @@ I have developed a Chat GPT clone project using HTML, JavaScript, and CSS. In th
 - Responsive design for cross-device compatibility
 
 ## Screenshots:
-
+![](chatGBT.gif)
