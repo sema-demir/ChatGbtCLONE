@@ -16,6 +16,4 @@ I have developed a Chat GPT clone project using HTML, JavaScript, and CSS. In th
 - Responsive design for cross-device compatibility
 
 ## Screenshots:
-![Light Mode](link-to-light-mode-screenshot)
-![Dark Mode](link-to-dark-mode-screenshot)
 
